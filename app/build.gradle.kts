@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "edu.illinois.cs465.traveltales"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "edu.illinois.cs465.traveltales"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
