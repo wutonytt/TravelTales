@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-
         // Recycler View
 //        setContentView(R.layout.fragment_add);
 //        textView = findViewById(R.id.text_add);

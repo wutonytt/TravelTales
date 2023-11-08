@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class AddFragment extends Fragment {
     RecyclerView recyclerView;
     TextView textView;
     Button choose_picture;
+    Button choose_picture_done;
     ArrayList<Uri> uri = new ArrayList<>();
     RecyclerAdapter adapter;
     ActivityResultLauncher<Intent> activityResultLauncher;
@@ -62,6 +64,7 @@ public class AddFragment extends Fragment {
         View root = binding.getRoot();
         textView = root.findViewById(R.id.text_add);
         choose_picture = root.findViewById(R.id.choose_picture);
+        choose_picture_done = root.findViewById(R.id.choose_picture_done);
         adapter = new RecyclerAdapter(uri);
         recyclerView = root.findViewById(R.id.recyclerview_gallery_image);
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 4));
@@ -88,6 +91,15 @@ public class AddFragment extends Fragment {
             }
         });
 
+        choose_picture_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("ray_log", "Done button pressed");
+                Intent intent = new Intent(requireContext(), AddCoverPhoto.class);
+                startActivity(intent);
+            }
+        });
+
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -107,12 +119,9 @@ public class AddFragment extends Fragment {
                         }
                     }
                 });
-//        Button choose = new Button(getActivity().findViewById(R.id.choose_picture));
 
-        //final Button choosePicture = binding.choosePicture;
         final TextView textView = binding.textAdd;
         addViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         return root;
     }
 
