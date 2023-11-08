@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,8 +25,13 @@ public class AddFragment extends Fragment {
         binding = FragmentAddBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+//        Button choose = new Button(getActivity().findViewById(R.id.choose_picture));
+
+        final Button choosePicture = binding.choosePicture;
+        //addViewModel.getText().observe(getViewLifecycleOwner(),choosePicture:);
         final TextView textView = binding.textAdd;
         addViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 
