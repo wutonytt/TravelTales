@@ -1,5 +1,6 @@
 package edu.illinois.cs465.traveltales;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,20 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
 
     private ArrayList<Uri> uriArrayList;
+    private OnCoverPhotoSelectedListener listener;
+    private int coverphotoid = -1;
 
     public RecyclerAdapter(ArrayList<Uri> uriArrayList){
         this.uriArrayList = uriArrayList;
+    }
+
+    // A medium interface to intro the needed vars
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.image);
+        }
     }
 
     @NonNull
@@ -29,22 +41,42 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    // place the data into ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
+        //Log.v("ray", "Assigning ..... " + holder.getAdapterPosition());
         holder.imageView.setImageURI(uriArrayList.get(position));
+        holder.imageView.setAlpha(1f);
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(coverphotoid != -1){
+                    //Log.v("ray", "Reseting old cover photo's alpha = " + holder.getAdapterPosition());
+                    notifyItemChanged(coverphotoid);
+                }
+                coverphotoid = holder.getAdapterPosition();
+                holder.imageView.setAlpha(0.5f);
+                //Log.v("ray", "Current cover photo is " + holder.getAdapterPosition());
+
+                // Notify the listener with the new cover photo ID.
+                if (listener != null) {
+                    listener.onCoverPhotoSelected(coverphotoid);
+                }
+            }
+        });
     }
 
+    public interface OnCoverPhotoSelectedListener {
+        void onCoverPhotoSelected(int coverPhotoId);
+    }
+
+    public void setOnCoverPhotoSelectedListener(OnCoverPhotoSelectedListener listener) {
+        this.listener = listener;
+    }
     @Override
     public int getItemCount() {
         return uriArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView imageView;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.image);
-        }
-    }
 }

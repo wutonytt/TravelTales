@@ -41,12 +41,15 @@ import edu.illinois.cs465.traveltales.RecyclerAdapter;
 import edu.illinois.cs465.traveltales.databinding.ActivityMainBinding;
 import edu.illinois.cs465.traveltales.databinding.FragmentAddBinding;
 
-public class AddFragment extends Fragment {
+public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhotoSelectedListener {
 
     private FragmentAddBinding binding;
 
+    public int totalcount = 0;
+    private int coverPhotoId = -1;
     RecyclerView recyclerView;
     TextView textView;
+    TextView coverphototextView;
     Button choose_picture;
     Button choose_picture_done;
     ArrayList<Uri> uri = new ArrayList<>();
@@ -63,11 +66,13 @@ public class AddFragment extends Fragment {
         binding = FragmentAddBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         textView = root.findViewById(R.id.text_add);
+        coverphototextView = root.findViewById(R.id.text_choose_cover_photo);
         choose_picture = root.findViewById(R.id.choose_picture);
         choose_picture_done = root.findViewById(R.id.choose_picture_done);
         adapter = new RecyclerAdapter(uri);
+        adapter.setOnCoverPhotoSelectedListener(this);
         recyclerView = root.findViewById(R.id.recyclerview_gallery_image);
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 4));
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         recyclerView.setAdapter(adapter);
 
         choose_picture.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +101,9 @@ public class AddFragment extends Fragment {
             public void onClick(View v) {
                 Log.v("ray_log", "Done button pressed");
                 Intent intent = new Intent(requireContext(), AddCoverPhoto.class);
+                intent.putExtra("selected_images", uri);
+                Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
+                intent.putExtra("cover_photo_id", coverPhotoId);
                 startActivity(intent);
             }
         });
@@ -110,8 +118,10 @@ public class AddFragment extends Fragment {
                             for(int j=0; j<count; j++){
                                 uri.add(result.getData().getClipData().getItemAt(j).getUri());
                             }
+                            totalcount += count;
                             adapter.notifyDataSetChanged();
-                            textView.setText("Photos ("+count+")");
+                            textView.setText("Photos ("+totalcount+")");
+                            coverphototextView.setText("Choose One Cover Photo");
                         }
                         else if(result.getData().getData() != null){
                             String imageUrl  = result.getData().getData().getPath();
@@ -123,6 +133,11 @@ public class AddFragment extends Fragment {
         final TextView textView = binding.textAdd;
         addViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    public void onCoverPhotoSelected(int selectedCoverPhotoId) {
+        coverPhotoId = selectedCoverPhotoId;
+        Log.v("ray", "Current cover photo is " + coverPhotoId);
     }
 
     @Override
