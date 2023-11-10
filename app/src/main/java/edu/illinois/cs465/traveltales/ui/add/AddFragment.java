@@ -52,6 +52,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
     TextView textView;
     TextView coverphototextView;
     Button choose_picture;
+    Button choose_picture_rest;
     Button choose_picture_done;
     ArrayList<Uri> uri = new ArrayList<>();
     RecyclerAdapter adapter;
@@ -66,10 +67,10 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
 
         binding = FragmentAddBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        textView = root.findViewById(R.id.text_add);
         coverphototextView = root.findViewById(R.id.text_choose_cover_photo);
         choose_picture = root.findViewById(R.id.choose_picture);
         choose_picture_done = root.findViewById(R.id.choose_picture_done);
+        choose_picture_rest = root.findViewById(R.id.choose_picture_reset);
         adapter = new RecyclerAdapter(uri);
         adapter.setOnCoverPhotoSelectedListener(this);
         recyclerView = root.findViewById(R.id.recyclerview_gallery_image);
@@ -120,6 +121,17 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
             }
         });
 
+
+        choose_picture_rest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                totalcount = 0;
+                uri.clear();
+                adapter.notifyDataSetChanged();
+                coverphototextView.setText("Please Select Photos");
+            }
+        });
+
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -132,7 +144,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                             }
                             totalcount += count;
                             adapter.notifyDataSetChanged();
-                            textView.setText("Photos ("+totalcount+")");
+                            Toast.makeText(getContext(), "Select ("+totalcount+") photos", Toast.LENGTH_LONG).show();
                             coverphototextView.setText("Choose One Cover Photo");
                         }
                         else if(result.getData().getData() != null){
@@ -141,9 +153,6 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                         }
                     }
                 });
-
-        final TextView textView = binding.textAdd;
-        addViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
