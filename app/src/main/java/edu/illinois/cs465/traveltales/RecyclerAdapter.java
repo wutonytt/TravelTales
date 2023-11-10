@@ -51,12 +51,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(coverphotoid != -1){
-                    //Log.v("ray", "Reseting old cover photo's alpha = " + holder.getAdapterPosition());
-                    notifyItemChanged(coverphotoid);
+
+                // Cancel selection by clicking the selected cover photo
+                if(coverphotoid == holder.getAdapterPosition()){
+                    coverphotoid = -1;
+                    holder.imageView.setAlpha(1f);
                 }
-                coverphotoid = holder.getAdapterPosition();
-                holder.imageView.setAlpha(0.5f);
+                else{
+                    if(coverphotoid != -1){
+                        //Log.v("ray", "Reseting old cover photo's alpha = " + holder.getAdapterPosition());
+                        notifyItemChanged(coverphotoid);
+                    }
+                    coverphotoid = holder.getAdapterPosition();
+                    holder.imageView.setAlpha(0.5f);
+                }
                 //Log.v("ray", "Current cover photo is " + holder.getAdapterPosition());
 
                 // Notify the listener with the new cover photo ID.

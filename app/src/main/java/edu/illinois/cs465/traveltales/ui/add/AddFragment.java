@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -99,6 +100,17 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
         choose_picture_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(uri.size() == 0){
+                    Toast.makeText(getContext(), "Require to choose at least one photo", Toast.LENGTH_LONG).show();
+                    return ;
+                }
+
+                if(coverPhotoId == -1){
+                    Toast.makeText(getContext(), "Require to choose a cover photo", Toast.LENGTH_LONG).show();
+                    return ;
+                }
+
                 Log.v("ray_log", "Done button pressed");
                 Intent intent = new Intent(requireContext(), AddCoverPhoto.class);
                 intent.putExtra("selected_images", uri);
