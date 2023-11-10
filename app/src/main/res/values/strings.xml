@@ -5,4 +5,10 @@
     <string name="title_add">Add</string>
     <string name="title_map">Map</string>
     <string name="title_profile">Profile</string>
+    <string name="title_activity_click_photo">Click Photo</string>
+    <string name="title_activity_write_description">Write Description</string>
+    <string name="action_done">Done</string>
+    <string name="dialog_discard_edit">Discard edit?</string>
+    <string name="discard">Discard</string>
+    <string name="cancel">Cancel</string>
 </resources>
