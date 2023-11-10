@@ -1,17 +1,21 @@
 package edu.illinois.cs465.traveltales.ui.add;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+
+import java.util.Objects;
 
 import edu.illinois.cs465.traveltales.R;
 
@@ -32,19 +36,15 @@ public class WriteDescriptionActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.write_description);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        edit_text_title = (EditText) findViewById(R.id.edit_text_title);
+        edit_text_title = findViewById(R.id.edit_text_title);
         edit_text_title.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s.toString().trim().length() == 0){
-                    myItemShouldBeEnabled = false;
-                } else {
-                    myItemShouldBeEnabled = true;
-                }
+                myItemShouldBeEnabled = s.toString().trim().length() != 0;
                 invalidateOptionsMenu();
             }
 
@@ -74,25 +74,20 @@ public class WriteDescriptionActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.action_done);
-        if (myItemShouldBeEnabled) {
-            item.setEnabled(true);
-        } else {
-            item.setEnabled(false);
-        }
+        item.setEnabled(myItemShouldBeEnabled);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        edit_text_title = (EditText) findViewById(R.id.edit_text_title);
-        edit_text_description = (EditText) findViewById(R.id.edit_text_description);
+        edit_text_title = findViewById(R.id.edit_text_title);
+        edit_text_description = findViewById(R.id.edit_text_description);
 
         title = edit_text_title.getText().toString();
         description = edit_text_description.getText().toString();
 
         if (item.getItemId() == R.id.action_done) {
             // TODO: store input value and return to the previous page with updated identifier
-            String[] value = {title, description};
             Toast.makeText(WriteDescriptionActivity.this, title + description, Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, ClickPhotoActivity.class);
@@ -100,6 +95,11 @@ public class WriteDescriptionActivity extends AppCompatActivity
 
         } else if (item.getItemId() == android.R.id.home) {
             if (title.length() != 0 || description.length() != 0) {
+                edit_text_title.clearFocus();
+                edit_text_description.clearFocus();
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(edit_text_title.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(edit_text_description.getWindowToken(), 0);
                 showDiscardEditDialog();
                 return true;
             }
