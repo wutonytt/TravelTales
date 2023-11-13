@@ -20,26 +20,17 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.ArrayList;
 
-import edu.illinois.cs465.traveltales.MainActivity;
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.RecyclerAdapter;
-import edu.illinois.cs465.traveltales.databinding.ActivityMainBinding;
 import edu.illinois.cs465.traveltales.databinding.FragmentAddBinding;
 
 public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhotoSelectedListener {
@@ -113,9 +104,9 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 }
 
                 Log.v("ray_log", "Done button pressed");
-                Intent intent = new Intent(requireContext(), AddCoverPhoto.class);
+                Intent intent = new Intent(requireContext(), ClickPhotoActivity.class);
                 intent.putExtra("selected_images", uri);
-                Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
+//                Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
                 intent.putExtra("cover_photo_id", coverPhotoId);
                 startActivity(intent);
             }

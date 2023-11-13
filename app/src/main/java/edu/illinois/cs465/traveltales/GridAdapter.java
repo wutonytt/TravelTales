@@ -1,27 +1,30 @@
 package edu.illinois.cs465.traveltales;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class GridAdapter extends BaseAdapter {
     Context context;
 
-    int[] image;
+    ArrayList<Uri> image;
 
     LayoutInflater inflater;
 
-    public GridAdapter(Context context, int[] image) {
+    public GridAdapter(Context context, ArrayList<Uri> image) {
         this.context = context;
         this.image = image;
     }
 
     @Override
     public int getCount() {
-        return image.length;
+        return image.size();
     }
 
     @Override
@@ -43,7 +46,7 @@ public class GridAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.click_photo_grid_item, null);
         }
         ImageView imageView = convertView.findViewById(R.id.grid_image);
-        imageView.setImageResource(image[position]);
+        imageView.setImageURI(image.get(position));
 
         return convertView;
     }

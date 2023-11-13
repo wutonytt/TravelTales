@@ -2,14 +2,16 @@ package edu.illinois.cs465.traveltales.ui.add;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import edu.illinois.cs465.traveltales.GridAdapter;
-import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.databinding.ClickPhotoBinding;
 
 public class ClickPhotoActivity extends AppCompatActivity {
@@ -25,9 +27,10 @@ public class ClickPhotoActivity extends AppCompatActivity {
         binding = ClickPhotoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // TODO: integrate db here
-        int[] image = {R.drawable.eiffel_tower, R.drawable.louvre_museum, R.drawable.arc_de_triomphe};
+        ArrayList<Uri> image = (ArrayList<Uri>) getIntent().getSerializableExtra("selected_images");
+        int coverPhotoId = getIntent().getIntExtra("cover_photo_id", 0);
 
+        // TODO: integrate db here
         GridAdapter gridAdapter = new GridAdapter(ClickPhotoActivity.this, image);
 
         binding.gridViewPhoto.setAdapter(gridAdapter);
