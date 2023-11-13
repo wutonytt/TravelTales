@@ -20,6 +20,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -48,6 +49,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
 
     public int totalcount = 0;
     private int coverPhotoId = -1;
+    private static final int PICK_IMAGE = 1;
     RecyclerView recyclerView;
     TextView textView;
     TextView coverphototextView;
@@ -92,8 +94,8 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 }
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                //startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-                activityResultLauncher.launch(intent);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                //activityResultLauncher.launch(intent);
 
             }
         });
@@ -131,30 +133,35 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 coverphototextView.setText("Please Select Photos");
             }
         });
-
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-
-                        if(result.getResultCode() == RESULT_OK && null != result.getData()){
-                            int count = result.getData().getClipData().getItemCount();
-                            for(int j=0; j<count; j++){
-                                uri.add(result.getData().getClipData().getItemAt(j).getUri());
-                            }
-                            totalcount += count;
-                            adapter.notifyDataSetChanged();
-                            Toast.makeText(getContext(), "Select ("+totalcount+") photos", Toast.LENGTH_LONG).show();
-                            coverphototextView.setText("Choose One Cover Photo");
-                        }
-                        else if(result.getData().getData() != null){
-                            String imageUrl  = result.getData().getData().getPath();
-                            uri.add(Uri.parse(imageUrl));
-                        }
-                    }
-                });
         return root;
     }
+
+    // Select image activity
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK && data!=null){
+            // Select multiple images
+            if(data.getClipData()!= null){
+                int count = data.getClipData().getItemCount();
+                for(int j=0; j<count; j++){
+                    uri.add(data.getClipData().getItemAt(j).getUri());
+                }
+                totalcount += count;
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Select ("+totalcount+") photos", Toast.LENGTH_LONG).show();
+                coverphototextView.setText("Choose One Cover Photo");
+            }
+            // Select a single image
+            else{
+                uri.add(data.getData());
+            }
+        }
+        // No image selected
+        else{
+            Toast.makeText(getContext(), "Select (0) photo", Toast.LENGTH_LONG).show();
+        }
+    };
 
     public void onCoverPhotoSelected(int selectedCoverPhotoId) {
         coverPhotoId = selectedCoverPhotoId;
