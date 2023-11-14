@@ -15,50 +15,36 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-import edu.illinois.cs465.traveltales.MainActivity;
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.RecyclerAdapter;
-import edu.illinois.cs465.traveltales.databinding.ActivityMainBinding;
 import edu.illinois.cs465.traveltales.databinding.FragmentAddBinding;
 
 public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhotoSelectedListener {
 
     private FragmentAddBinding binding;
 
-    public int totalcount = 0;
+    public int totalCount = 0;
     private int coverPhotoId = -1;
     private static final int PICK_IMAGE = 1;
     RecyclerView recyclerView;
-    TextView textView;
     TextView coverphototextView;
     Button choose_picture;
     Button choose_picture_rest;
     Button choose_picture_done;
     ArrayList<Uri> uri = new ArrayList<>();
     RecyclerAdapter adapter;
-    ActivityResultLauncher<Intent> activityResultLauncher;
     private static final int Read_Permission = 101;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -115,7 +101,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 }
 
                 Log.v("ray_log", "Done button pressed");
-                Intent intent = new Intent(requireContext(), AddCoverPhoto.class);
+                Intent intent = new Intent(requireContext(), WriteDescriptionActivity.class);
                 intent.putExtra("selected_images", uri);
                 Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
                 intent.putExtra("cover_photo_id", coverPhotoId);
@@ -127,7 +113,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
         choose_picture_rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                totalcount = 0;
+                totalCount = 0;
                 uri.clear();
                 adapter.notifyDataSetChanged();
                 coverphototextView.setText("Please Select Photos");
@@ -147,9 +133,9 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 for(int j=0; j<count; j++){
                     uri.add(data.getClipData().getItemAt(j).getUri());
                 }
-                totalcount += count;
+                totalCount += count;
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getContext(), "Select ("+totalcount+") photos", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Select ("+ totalCount +") photos", Toast.LENGTH_LONG).show();
                 coverphototextView.setText("Choose One Cover Photo");
             }
             // Select a single image
@@ -161,7 +147,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
         else{
             Toast.makeText(getContext(), "Select (0) photo", Toast.LENGTH_LONG).show();
         }
-    };
+    }
 
     public void onCoverPhotoSelected(int selectedCoverPhotoId) {
         coverPhotoId = selectedCoverPhotoId;
