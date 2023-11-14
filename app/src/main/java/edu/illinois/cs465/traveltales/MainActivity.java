@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 import edu.illinois.cs465.traveltales.databinding.ActivityMainBinding;
 import edu.illinois.cs465.traveltales.ui.add.AddFragment;
+import edu.illinois.cs465.traveltales.ui.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Recycler View
+        binding.navView.setOnItemSelectedListener(item -> {
+            handleBottomNavigationClick(item.getItemId());
+            return true;
+        });
+    }
+    // Recycler View
 //        setContentView(R.layout.fragment_add);
 //        textView = findViewById(R.id.text_add);
 //        choose_picture = findViewById(R.id.choose_picture);
@@ -115,5 +121,20 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 //                    }
 //                });
+
+    /*
+     if you click on any of the buttons on the main page
+     (including the buttons in the bottom navigation bar)
+    */
+    public void handleBottomNavigationClick(int itemId) {
+
+        Intent intent;
+        switch (itemId) {
+            case R.id.navigation_home:
+                NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.profileFragment); // TODO: change to the id in that specific file
+        }
     }
+
+
 }
