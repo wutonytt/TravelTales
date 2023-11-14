@@ -104,9 +104,9 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 }
 
                 Log.v("ray_log", "Done button pressed");
-                Intent intent = new Intent(requireContext(), ClickPhotoActivity.class);
+                Intent intent = new Intent(requireContext(), WriteDescriptionActivity.class);
                 intent.putExtra("selected_images", uri);
-//                Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
+                Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
                 intent.putExtra("cover_photo_id", coverPhotoId);
                 startActivity(intent);
             }

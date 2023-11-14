@@ -16,14 +16,19 @@
         android:theme="@style/Theme.TravelTales"
         tools:targetApi="31">
         <activity
-            android:name=".ui.add.ClickPhotoActivity"
+            android:name=".ui.add.SelectedPhotos"
             android:exported="false"
-            android:label="@string/title_activity_click_photo"
+            android:label="@string/title_activity_selected_photo"
             android:theme="@style/Theme.TravelTales" />
         <activity
             android:name=".ui.add.WriteDescriptionActivity"
             android:exported="false"
             android:label="@string/title_activity_write_description"
+            android:theme="@style/Theme.TravelTales" />
+        <activity
+            android:name=".ui.add.ConfirmPost"
+            android:exported="false"
+            android:label="@string/title_add_post_confirmation"
             android:theme="@style/Theme.TravelTales" />
         <activity
             android:name=".MainActivity"
