@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Text: "TRAVEL TALES" -->
+<!--    Travel Tales text on top of screen-->
     <TextView
         android:id="@+id/travelTalesText"
         android:layout_width="wrap_content"
@@ -14,7 +14,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
-    <!-- Profile Picture and Name -->
     <RelativeLayout
         android:id="@+id/profileLayout"
         android:layout_width="wrap_content"
@@ -23,6 +22,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp">
 
+<!--     Add profile picture-->
         <ImageView
             android:id="@+id/profilePicture"
             android:layout_width="80dp"
@@ -33,7 +33,7 @@
             android:src="@drawable/profilepicture"
             android:clipToOutline="true" />
 
-
+<!--     Add username under profile picture-->
         <TextView
             android:id="@+id/username"
             android:layout_width="34dp"
@@ -44,6 +44,7 @@
             android:layout_below="@id/profilePicture"
             android:textSize="16sp" />
 
+<!--     Add text for "Journal Entries"-->
         <TextView
             android:id="@+id/journalText"
             android:layout_width="wrap_content"
@@ -54,6 +55,7 @@
             android:layout_alignTop="@id/profilePicture"
             android:textSize="16sp" />
 
+<!--     Add number of Journal Entries user has-->
         <TextView
             android:id="@+id/journalCount"
             android:layout_width="wrap_content"
@@ -66,7 +68,6 @@
 
     </RelativeLayout>
 
-    <!-- Journal Entries -->
     <LinearLayout
         android:id="@+id/journalLayout"
         android:layout_width="wrap_content"
@@ -80,7 +81,7 @@
 
     </LinearLayout>
 
-    <!-- Four Pictures -->
+<!--    Add all images the user has-->
     <GridLayout
         android:id="@+id/picturesGrid"
         android:layout_width="match_parent"
@@ -92,7 +93,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp">
 
-        <!-- Add ImageViews for your pictures -->
         <ImageView
             android:id="@+id/picture1"
             android:layout_width="0dp"
