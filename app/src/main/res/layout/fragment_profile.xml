@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"/>
 
     <!-- Profile Picture and Name -->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/profileLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,19 +28,43 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="40dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/profilepicture" />
+            android:src="@drawable/profilepicture"
+            android:clipToOutline="true" />
+
 
         <TextView
             android:id="@+id/username"
+            android:layout_width="34dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="10dp"
+            android:text="Sam"
+            android:layout_below="@id/profilePicture"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/journalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sam"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp"/>
+            android:text="Journal Entries: "
+            android:layout_marginLeft="130dp"
+            android:layout_toEndOf="@id/profilePicture"
+            android:layout_alignTop="@id/profilePicture"
+            android:textSize="16sp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/journalCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/journalText"
+            android:layout_alignTop="@id/journalText"
+
+            android:text="4"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 
     <!-- Journal Entries -->
     <LinearLayout
@@ -52,22 +76,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:orientation="vertical"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            android:id="@+id/journalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Journal Entries"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:id="@+id/journalCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"
-            android:textSize="16sp"
-            android:layout_marginStart="4dp"/>
+        android:layout_toEndOf="@id/profileLayout">
 
     </LinearLayout>
 
