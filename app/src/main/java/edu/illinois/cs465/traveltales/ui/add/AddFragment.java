@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.RecyclerAdapter;
 import edu.illinois.cs465.traveltales.databinding.FragmentAddBinding;
+import edu.illinois.cs465.traveltales.ui.profile.ProfileFragment;
 
 public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhotoSelectedListener {
 
@@ -49,7 +50,6 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         AddViewModel addViewModel =
                 new ViewModelProvider(this).get(AddViewModel.class);
 
@@ -152,6 +152,15 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
     public void onCoverPhotoSelected(int selectedCoverPhotoId) {
         coverPhotoId = selectedCoverPhotoId;
         Log.v("ray", "Current cover photo is " + coverPhotoId);
+    }
+
+    public static AddFragment newInstance() {
+        final AddFragment fragment = new AddFragment();
+        final Bundle args = new Bundle();
+//        args.putString("cover_photo_path", coverPhotopath);
+//        args.putInt("cover_photo_id", coverPhotoId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
