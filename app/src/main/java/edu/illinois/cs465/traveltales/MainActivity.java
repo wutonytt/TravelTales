@@ -65,55 +65,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        // Recycler View
-//        setContentView(R.layout.fragment_add);
-//        textView = findViewById(R.id.text_add);
-//        choose_picture = findViewById(R.id.choose_picture);
-//        adapter = new RecyclerAdapter(uri);
-//        recyclerView = findViewById(R.id.recyclerview_gallery_image);
-//        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 4));
-//        recyclerView.setAdapter(adapter);
-//
-//        choose_picture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, Read_Permission);
-//                }
-//
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-//                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//                }
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                //startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-//                activityResultLauncher.launch(intent);
-//
-//            }
-//        });
-//
-//        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//                new ActivityResultCallback<ActivityResult>() {
-//                    @Override
-//                    public void onActivityResult(ActivityResult result) {
-//
-//                        if(result.getResultCode() == RESULT_OK && null != result.getData()){
-//                            int count = result.getData().getClipData().getItemCount();
-//                            for(int j=0; j<count; j++){
-//                                uri.add(result.getData().getClipData().getItemAt(j).getUri());
-//                            }
-//                            adapter.notifyDataSetChanged();
-//                            textView.setText("Photos ("+count+")");
-//                        }
-//                        else if(result.getData().getData() != null){
-//                            String imageUrl  = result.getData().getData().getPath();
-//                            uri.add(Uri.parse(imageUrl));
-//                        }
-//                    }
-//                });
     }
 }
