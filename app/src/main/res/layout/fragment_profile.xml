@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TRAVEL TALES"
+        android:textStyle="bold"
+        android:textColor="#000000"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
@@ -25,13 +29,16 @@
 <!--     Add profile picture-->
         <ImageView
             android:id="@+id/profilePicture"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/profilepicture"
-            android:clipToOutline="true" />
+            android:src="@drawable/samProfileImage" />
 
 <!--     Add username under profile picture-->
         <TextView
@@ -39,7 +46,9 @@
             android:layout_width="34dp"
             android:layout_height="18dp"
             android:layout_marginTop="4dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="60dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
             android:text="Sam"
             android:layout_below="@id/profilePicture"
             android:textSize="16sp" />
@@ -50,7 +59,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Journal Entries: "
-            android:layout_marginLeft="130dp"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop= "30dp"
             android:layout_toEndOf="@id/profilePicture"
             android:layout_alignTop="@id/profilePicture"
             android:textSize="16sp" />
@@ -63,17 +76,24 @@
             android:text="Latest Travel Location: "
             android:layout_below="@id/journalText"
             android:layout_marginTop="16dp"
-            android:layout_marginLeft="170dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/profilePicture"
+            android:textStyle="bold"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
         <!-- Add flag image for the latest travel location -->
         <ImageView
             android:id="@+id/flagImage"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:layout_below="@id/journalCount"
             android:layout_toEndOf="@id/latestTravelText"
-            android:layout_marginTop="16sp"
+            android:layout_alignTop="@id/latestTravelText"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="0sp"
+            android:layout_alignParentRight="true"
             android:src="@drawable/usaflag" />
 
 <!--     Add number of Journal Entries user has-->
@@ -83,7 +103,9 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/journalText"
             android:layout_alignTop="@id/journalText"
-
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:textColor="#000000"
             android:text="4"
             android:textSize="16sp" />
 
@@ -155,4 +177,29 @@
             android:scaleType="centerCrop"/>
 
     </GridLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <fragment
+        android:id="@+id/nav_host_fragment_activity_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
+
 </RelativeLayout>
