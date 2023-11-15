@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/travelTalesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TONY'S AMSTERDAM JOURNAL"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/profileLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/travelTalesText"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp">
+
+        <!--     Add profile picture-->
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tonypicture"
+            android:clipToOutline="true" />
+
+        <!--     Add username under profile picture-->
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="50dp"
+            android:text="Tony"
+            android:layout_below="@id/profilePicture"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/journalLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/profileLayout">
+
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/picturesGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/journalLayout"
+        android:layout_marginTop="16dp"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/picture1"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:src="@drawable/amsterdam6"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/picture2"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:src="@drawable/amsterdam5"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/picture3"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:src="@drawable/amsterdam4"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/picture4"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/amsterdam3"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/picture5"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/amsterdam2"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/picture6"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/amsterdam1"
+            android:scaleType="centerCrop"/>
+
+    </GridLayout>
+</RelativeLayout>
