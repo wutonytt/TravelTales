@@ -37,7 +37,7 @@
             android:layout_marginBottom="8dp"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/samProfileImage" />
+            android:src="@drawable/profilepicture" />
 
         <!--     Add username under profile picture-->
         <TextView
