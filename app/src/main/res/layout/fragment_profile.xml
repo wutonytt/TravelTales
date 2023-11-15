@@ -104,7 +104,7 @@
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:textColor="#000000"
-            android:text="4"
+            android:text="3"
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -229,7 +229,6 @@
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:layout_margin="8dp"
-                android:src="@drawable/london"
                 android:scaleType="centerCrop"/>
 
             <ImageView
@@ -238,8 +237,8 @@
                 android:layout_height="40dp"
                 android:layout_gravity="bottom|end"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/pencil" />
+                android:layout_marginEnd="8dp"/>
+
         </FrameLayout>
 
     </GridLayout>
