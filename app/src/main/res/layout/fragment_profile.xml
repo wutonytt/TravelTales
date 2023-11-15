@@ -55,6 +55,27 @@
             android:layout_alignTop="@id/profilePicture"
             android:textSize="16sp" />
 
+        <!-- Add text for "Latest Travel Location" -->
+        <TextView
+            android:id="@+id/latestTravelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latest Travel Location: "
+            android:layout_below="@id/journalText"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="170dp"
+            android:textSize="16sp" />
+
+        <!-- Add flag image for the latest travel location -->
+        <ImageView
+            android:id="@+id/flagImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/journalCount"
+            android:layout_toEndOf="@id/latestTravelText"
+            android:layout_marginTop="16sp"
+            android:src="@drawable/usaflag" />
+
 <!--     Add number of Journal Entries user has-->
         <TextView
             android:id="@+id/journalCount"
