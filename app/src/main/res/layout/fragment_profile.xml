@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    Travel Tales text on top of screen-->
+    <!--    Travel Tales text on top of screen-->
     <TextView
         android:id="@+id/travelTalesText"
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp">
 
-<!--     Add profile picture-->
+        <!--     Add profile picture-->
         <ImageView
             android:id="@+id/profilePicture"
             android:layout_width="150dp"
@@ -40,7 +40,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/samProfileImage" />
 
-<!--     Add username under profile picture-->
+        <!--     Add username under profile picture-->
         <TextView
             android:id="@+id/username"
             android:layout_width="34dp"
@@ -53,7 +53,7 @@
             android:layout_below="@id/profilePicture"
             android:textSize="16sp" />
 
-<!--     Add text for "Journal Entries"-->
+        <!--     Add text for "Journal Entries"-->
         <TextView
             android:id="@+id/journalText"
             android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/usaflag" />
 
-<!--     Add number of Journal Entries user has-->
+        <!--     Add number of Journal Entries user has-->
         <TextView
             android:id="@+id/journalCount"
             android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
 
     </LinearLayout>
 
-<!--    Add all images the user has-->
+    <!--    Add all images the user has-->
     <GridLayout
         android:id="@+id/picturesGrid"
         android:layout_width="match_parent"
@@ -136,45 +136,113 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp">
 
-        <ImageView
-            android:id="@+id/picture1"
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:src="@drawable/chicago"
-            android:layout_margin="8dp"
-            android:scaleType="centerCrop"/>
+            android:layout_rowWeight="1">
 
-        <ImageView
-            android:id="@+id/picture2"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:src="@drawable/paris"
-            android:layout_margin="8dp"
-            android:scaleType="centerCrop"/>
+            <ImageView
+                android:id="@+id/picture1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:src="@drawable/chicago"
+                android:layout_margin="8dp"
+                android:scaleType="centerCrop"/>
 
-        <ImageView
-            android:id="@+id/picture3"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:src="@drawable/newyork"
-            android:layout_margin="8dp"
-            android:scaleType="centerCrop"/>
+            <ImageView
+                android:id="@+id/pencilIcon1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/pencil" />
+        </FrameLayout>
 
-        <ImageView
-            android:id="@+id/picture4"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_margin="8dp"
-            android:src="@drawable/london"
-            android:scaleType="centerCrop"/>
+            android:layout_rowWeight="1">
+
+            <ImageView
+                android:id="@+id/picture2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:src="@drawable/paris"
+                android:layout_margin="8dp"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/pencilIcon2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/pencil" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1">
+
+            <ImageView
+                android:id="@+id/picture3"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/newyork" />
+
+            <ImageView
+                android:id="@+id/pencilIcon3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/pencil" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1">
+
+            <ImageView
+                android:id="@+id/picture4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="8dp"
+                android:src="@drawable/london"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/pencilIcon4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/pencil" />
+        </FrameLayout
 
     </GridLayout>
 
