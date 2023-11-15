@@ -242,7 +242,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/pencil" />
-        </FrameLayout
+        </FrameLayout>
 
     </GridLayout>
 
