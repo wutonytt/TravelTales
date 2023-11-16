@@ -1,5 +1,8 @@
 package edu.illinois.cs465.traveltales.ui.profile;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,12 +45,7 @@ public class ProfileFragment extends Fragment {
         final TextView journalCount = binding.journalCount;
         final GridLayout journalImages = binding.picturesGrid;
         final ImageView flagImage = binding.flagImage;
-
-        // TODO: when there is another post made
-        // update journalCount value
-        // update latest country traveled
-        // update journal Images to have another image of the latest photo
-
+        
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             // get the args
@@ -59,6 +58,23 @@ public class ProfileFragment extends Fragment {
             addPencil.setImageResource(R.drawable.pencil);
             journal_count+=1;
             journalCount.setText(String.valueOf(journal_count));
+
+            // progress bar - animate from 0 to 100 in 2000 milliseconds
+            // after animation completes, progress bar is set back to invisible
+            final ProgressBar progressbar = binding.progressBar;
+            progressbar.setVisibility(View.VISIBLE);
+
+            ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressbar, "progress", 0, 100);
+            progressAnimator.setDuration(2000);
+            progressAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progressbar.setVisibility(View.INVISIBLE);
+                }
+            });
+
+            progressAnimator.start();
+
             // Debug log
             Log.v("ray", "****  fragment pass to here " + journal_count);
         }
