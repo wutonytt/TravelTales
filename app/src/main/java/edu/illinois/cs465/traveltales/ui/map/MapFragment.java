@@ -52,8 +52,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             Log.d("supportFragment", "support map fragment loop finished");
         }
 
-        final TextView textView = binding.textMap;
-        mapViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//        final TextView textView = binding.textMap;
+//        mapViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         Log.d("onCreate", "on create loop finished");
         return root;
 
