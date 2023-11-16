@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/travelTalesText"
+        android:id="@+id/tonyjournaltext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TONY'S AMSTERDAM JOURNAL"
@@ -19,7 +19,7 @@
         android:id="@+id/profileLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/travelTalesText"
+        android:layout_below="@id/tonyjournaltext"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp">
 
@@ -49,7 +49,7 @@
 
 
         <ImageView
-            android:id="@+id/journalText"
+            android:id="@+id/flag"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginRight="10dp"
@@ -76,11 +76,21 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/seeDescriptionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See Description"
+        android:layout_below="@id/profileLayout"
+        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="onSeeDescriptionClick" />
+
     <GridLayout
         android:id="@+id/picturesGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/journalLayout"
+        android:layout_below="@id/seeDescriptionButton"
         android:layout_marginTop="5dp"
         android:columnCount="2"
         android:rowCount="3"
