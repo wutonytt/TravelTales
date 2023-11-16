@@ -1,6 +1,7 @@
 package edu.illinois.cs465.traveltales.ui.map;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,16 +42,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             String apiKey = getString(R.string.google_maps_key);
-            mapFragment.getMapAsync(googleMap1 -> {
-                if (googleMap != null) {
-                    googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-//                    googleMap.setMyLocationEnabled(true);
-                }
-            });
+//            mapFragment.getMapAsync(googleMap1 -> {
+//                if (googleMap != null) {
+//                    googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+////                    googleMap.setMyLocationEnabled(true);
+//                }
+//            });
+
+            mapFragment.getMapAsync(this);
+            Log.d("supportFragment", "support map fragment loop finished");
         }
 
-        final TextView textView = binding.textMap;
-        mapViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        Log.d("onCreate", "on create loop finished");
         return root;
     }
 
@@ -62,19 +65,40 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @Override
     public void onMapReady(GoogleMap map) {
+        Log.d("MapLoop", "enter onMap");
         googleMap = map;
         if (googleMap != null) {
             String apiKey = getString(R.string.google_maps_key);
+            Log.d("MapLoop", "In map loop");
 
             // Set up markers for different locations
-            LatLng location1 = new LatLng(37.7749, -122.4194);
-            LatLng location2 = new LatLng(37.7749, -122.4294);
+            LatLng madrid = new LatLng(40.416775, -3.703790);
+            LatLng chicago= new LatLng(41.8781, -87.6298);
+            LatLng nyc = new LatLng(40.730610, -73.935242);
+            LatLng london = new LatLng(51.509865, -0.118092);
 
-            googleMap.addMarker(new MarkerOptions().position(location1).title("Location 1"));
-            googleMap.addMarker(new MarkerOptions().position(location2).title("Location 2"));
+            MarkerOptions madridMarker = new MarkerOptions()
+                    .position(madrid)
+                    .title("Madrid");
 
-//        googleMap.setOnMarkerClickListener(this);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location1, 12));
+            MarkerOptions chicagoMarker = new MarkerOptions()
+                    .position(chicago)
+                    .title("Chicago");
+
+            MarkerOptions nycMarker = new MarkerOptions()
+                    .position(nyc)
+                    .title("NYC");
+
+            MarkerOptions londonMarker = new MarkerOptions()
+                    .position(london)
+                    .title("London");
+
+            googleMap.addMarker(madridMarker);
+            googleMap.addMarker(chicagoMarker);
+            googleMap.addMarker(nycMarker);
+            googleMap.addMarker(londonMarker);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(chicago, 5));
+            Log.d("MapFragment", "Marker added to the map");
         }
 
     }
