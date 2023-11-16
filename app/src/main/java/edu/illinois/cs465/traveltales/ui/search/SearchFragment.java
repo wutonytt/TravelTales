@@ -36,7 +36,6 @@ public class SearchFragment extends Fragment {
 
                 System.out.println("Submitted Text");
                 if (query.equals("Europe") || query.equals("europe")){
-                   System.out.println("Typed Europe");
 
                     // update journal entries
                     // get each of the 6 images
