@@ -18,7 +18,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-//import edu.illinois.cs465.traveltales.ui.location.LocationActivity;
 import edu.illinois.cs465.traveltales.R;
 
 import edu.illinois.cs465.traveltales.databinding.FragmentMapBinding;
@@ -42,12 +41,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             String apiKey = getString(R.string.google_maps_key);
-//            mapFragment.getMapAsync(googleMap1 -> {
-//                if (googleMap != null) {
-//                    googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-////                    googleMap.setMyLocationEnabled(true);
-//                }
-//            });
 
             mapFragment.getMapAsync(this);
             Log.d("supportFragment", "support map fragment loop finished");
@@ -99,7 +92,49 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             googleMap.addMarker(londonMarker);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(chicago, 5));
             Log.d("MapFragment", "Marker added to the map");
+
+            // create a listener, if you click on marker it opens your Chicago Journal
+            // TODO: if you click once, shows the name of the city, if you double click, call "open your Chicago Journal"
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                private long lastClickTime = 0;
+                private static final long DOUBLE_CLICK_TIME_DELTA = 3000; // milliseconds
+
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+
+                    // handle double clicking logic
+
+//                    System.out.println("CLICKED ON MARKER");
+//
+//                    long clickTime = System.currentTimeMillis();
+//                    if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA){
+//
+//
+//                        // Handle double click (open your Chicago journal)
+//                        openYourChicagoJournal();
+//                    }
+//                    lastClickTime = clickTime;
+
+                    if (marker.getTitle().equals("Chicago")) {
+                        openYourChicagoJournal();
+                    }
+
+                    return false;
+                }
+            });
+
         }
+
+    }
+
+    private void openYourChicagoJournal() {
+        YourChicagoJournalFragment yourChicagoJournalFragment = YourChicagoJournalFragment.newInstance();
+
+        // Replace the current fragment with the detail fragment
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, yourChicagoJournalFragment)
+                .commit();
 
     }
 
@@ -107,21 +142,4 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onMapClick(LatLng latLng) {
         return;
     }
-//
-//    @Override
-//    public boolean onMarkerClick(Marker marker) {
-//        // Handle marker click, navigate to location page
-//        navigateToLocationPage(marker.getTitle());
-//        return true;
-//    }
-
-//    private void navigateToLocationPage(String locationTitle) {
-//        // Start a new activity or fragment for the specific location
-//        // Pass any necessary data to the location page
-//        // For example, using Intent to start a new activity:
-//        Intent locationIntent = new Intent(getActivity(), LocationActivity.class);
-//        locationIntent.putExtra("locationTitle", locationTitle);
-//        startActivity(locationIntent);
-//    }
-
 }
