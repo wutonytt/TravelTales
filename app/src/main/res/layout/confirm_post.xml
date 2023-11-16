@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical" >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/confirm_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardCornerRadius="16dp"
+            android:layout_margin="30dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/confirm_cover_image"
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="40dp"
+            android:paddingBottom="30dp">
+            <TextView
+                android:id="@+id/confirm_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/confirm_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30sp" />
+            <TextView
+                android:id="@+id/confirm_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
