@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.databinding.FragmentUserJournalDescriptionBinding;
 import edu.illinois.cs465.traveltales.ui.search.UserJournalDescriptionFragment;
 
@@ -33,8 +35,18 @@ public class YourJournalDescriptionFragment extends Fragment {
             // change title
 
         final TextView description = binding.description;
+        description.setText("Chicago was a whirlwind of urban wonders! From the mesmerizing 'Bean' at Millennium Park to savoring noodles in Chinatown, exploring the Art Institute's artistic treasure trove, and indulging in deep-dish pizza at Lou Malnati's, it was a day filled with vibrant experiences. The city's energy pulsated through the Magnificent Mile and Navy Pier, ending with a mesmerizing skyline against the night sky—a day etched with Chicago's unique charm and bustling spirit.");
 
-        description.setText("NEW TEXT");
+        final TextView title = binding.Title;
+        title.setText("Chicago Adventures");
+
+        final TextView location = binding.location;
+        location.setText("Chicago, United States");
+
+        final ImageView coverImage = binding.coverImage;
+        coverImage.setImageResource(R.drawable.chicago2);
+
+
 
         return root;
     }
