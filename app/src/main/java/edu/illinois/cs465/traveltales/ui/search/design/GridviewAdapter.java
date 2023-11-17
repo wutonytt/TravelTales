@@ -19,11 +19,12 @@ import edu.illinois.cs465.traveltales.ui.search.model.PlacesModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridviewAdapter extends ArrayAdapter<PlacesModel> implements Filterable {
-
+public class GridviewAdapter extends ArrayAdapter<PlacesModel>  {
+    private ArrayList<PlacesModel> placesModels;
 
     public GridviewAdapter(@NonNull Context context, ArrayList<PlacesModel> placesModels) {
         super(context, 0 , placesModels);
+        this.placesModels = placesModels;
     }
 
     @NonNull
@@ -43,10 +44,17 @@ public class GridviewAdapter extends ArrayAdapter<PlacesModel> implements Filter
         }
 
         PlacesModel model = getItem(position);
+        if(model != null){
         holderView.icons.setImageResource(model.getIconId());
-        holderView.tv.setText(model.getLetters());
+        holderView.tv.setText(model.getLetters());}
 
         return convertView;
+    }
+
+    public void setData(ArrayList<PlacesModel> newData) {
+        placesModels.clear();
+        placesModels.addAll(newData);
+        notifyDataSetChanged();
     }
 
 
