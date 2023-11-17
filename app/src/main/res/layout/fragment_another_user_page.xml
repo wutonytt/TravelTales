@@ -28,11 +28,14 @@
             android:id="@+id/profilePicture"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/tonypicture"
-            android:clipToOutline="true" />
+            android:src="@drawable/tonypicture" />
 
         <!--     Add username under profile picture-->
         <TextView
