@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
             addImageView = root.findViewById(R.id.picture4);
             addImageView.setImageURI(coverPhotouri);
             addPencil = root.findViewById(R.id.pencilIcon4);
-            addPencil.setImageResource(R.drawable.pencil);
+            addPencil.setImageResource(R.drawable.ic_edit_white_24dp);
             journal_count = ((Global) this.getActivity().getApplication()).journal_count;
             journalCount.setText(String.valueOf(journal_count));
         }
