@@ -1,6 +1,7 @@
 package edu.illinois.cs465.traveltales.ui.add;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import edu.illinois.cs465.traveltales.Global;
 import edu.illinois.cs465.traveltales.MainActivity;
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.ui.profile.ProfileFragment;
@@ -81,8 +83,18 @@ public class ConfirmPost extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.action_next) {
+
             Toast.makeText(this, "Uploading new post...", Toast.LENGTH_SHORT).show();
             // TODO: store input value and return to the previous page with updated identifier
+
+            Log.v("ray", "Setting the global variable");
+            ((Global) this.getApplication()).images = images;
+            ((Global) this.getApplication()).coverPhotoId = coverPhotoId;
+            ((Global) this.getApplication()).title = title;
+            ((Global) this.getApplication()).location = location;
+            ((Global) this.getApplication()).description = description;
+            ((Global) this.getApplication()).journal_count += 1;
+
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("selected_images", images);
             Log.v("tony", "Sending the cover photo id =" + coverPhotoId);

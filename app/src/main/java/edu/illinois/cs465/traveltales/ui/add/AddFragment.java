@@ -73,7 +73,6 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, Read_Permission);
                 }
-
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -81,8 +80,6 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 }
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-                //activityResultLauncher.launch(intent);
-
             }
         });
 
