@@ -150,14 +150,16 @@
                 android:layout_margin="8dp"
                 android:scaleType="centerCrop"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/pencilIcon1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/pencil" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_edit_white_24dp"
+                app:tint="@color/white"
+                android:background="@null" />
         </FrameLayout>
 
         <FrameLayout
@@ -176,14 +178,16 @@
                 android:layout_margin="8dp"
                 android:scaleType="centerCrop"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/pencilIcon2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/pencil" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_edit_white_24dp"
+                app:tint="@color/white"
+                android:background="@null" />
         </FrameLayout>
 
         <FrameLayout
@@ -206,14 +210,16 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/newyork" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/pencilIcon3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/pencil" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_edit_white_24dp"
+                app:tint="@color/white"
+                android:background="@null" />
         </FrameLayout>
 
         <FrameLayout
@@ -231,13 +237,15 @@
                 android:layout_margin="8dp"
                 android:scaleType="centerCrop"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/pencilIcon4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:tint="@color/white"
+                android:background="@null" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

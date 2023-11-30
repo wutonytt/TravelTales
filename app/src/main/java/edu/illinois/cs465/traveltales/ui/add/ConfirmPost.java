@@ -1,13 +1,11 @@
 package edu.illinois.cs465.traveltales.ui.add;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import edu.illinois.cs465.traveltales.Global;
 import edu.illinois.cs465.traveltales.MainActivity;
 import edu.illinois.cs465.traveltales.R;
-import edu.illinois.cs465.traveltales.ui.profile.ProfileFragment;
 
 public class ConfirmPost extends AppCompatActivity {
 
@@ -54,15 +51,12 @@ public class ConfirmPost extends AppCompatActivity {
         textViewLocation.setText(location);
         textViewDescription.setText(description);
 
-        imageView.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SelectedPhotos.class);
-                intent.putExtra("selected_images", images);
-                Log.v("tony", "Sending the cover photo id =" + coverPhotoId);
-                intent.putExtra("cover_photo_id", coverPhotoId);
-                startActivity(intent);
-            }
+        imageView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SelectedPhotos.class);
+            intent.putExtra("selected_images", images);
+            Log.v("tony", "Sending the cover photo id =" + coverPhotoId);
+            intent.putExtra("cover_photo_id", coverPhotoId);
+            startActivity(intent);
         });
 
     }
@@ -93,9 +87,10 @@ public class ConfirmPost extends AppCompatActivity {
             ((Global) this.getApplication()).title = title;
             ((Global) this.getApplication()).location = location;
             ((Global) this.getApplication()).description = description;
-            ((Global) this.getApplication()).journal_count += 1;
+            ((Global) this.getApplication()).journal_count = 4;
 
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("id", 1);
             intent.putExtra("selected_images", images);
             Log.v("tony", "Sending the cover photo id =" + coverPhotoId);
             intent.putExtra("cover_photo_id", coverPhotoId);

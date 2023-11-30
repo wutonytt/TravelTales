@@ -3,33 +3,31 @@ package edu.illinois.cs465.traveltales.ui.profile;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 
 import edu.illinois.cs465.traveltales.Global;
+import edu.illinois.cs465.traveltales.MainActivity;
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
-    private int coverPhotoId = -1;
-    private ImageView addImageView;
-    private ImageView addPencil;
+    int coverPhotoId = -1;
+    ImageView addImageView;
+    ImageView addPencil;
 
 
     // initial journal counts: set3
@@ -37,17 +35,11 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProfileViewModel profileViewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
-
         // binding object allows you to interact with the views in the layout
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
         final TextView journalCount = binding.journalCount;
-        final GridLayout journalImages = binding.picturesGrid;
-        final ImageView flagImage = binding.flagImage;
 
         coverPhotoId = ((Global) this.getActivity().getApplication()).coverPhotoId;
         if(coverPhotoId != -1){
@@ -56,8 +48,20 @@ public class ProfileFragment extends Fragment {
             addImageView = root.findViewById(R.id.picture4);
             addImageView.setImageURI(coverPhotouri);
             addPencil = root.findViewById(R.id.pencilIcon4);
-            addPencil.setImageResource(R.drawable.pencil);
-            journal_count = ((Global) this.getActivity().getApplication()).journal_count;
+            addPencil.setImageResource(R.drawable.ic_edit_white_24dp);
+            addPencil.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                intent.putExtra("id", 2);
+                Global global = (Global) getActivity().getApplication();
+                System.out.println(global);
+                intent.putExtra("images", global.images);
+                intent.putExtra("coverPhotoId", global.coverPhotoId);
+                intent.putExtra("title", global.title);
+                intent.putExtra("location", global.location);
+                intent.putExtra("description", global.description);
+                startActivity(intent);
+            });
+            journal_count += 1;
             journalCount.setText(String.valueOf(journal_count));
         }
 
