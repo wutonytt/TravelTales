@@ -285,6 +285,18 @@
                 app:tint="@color/white"
                 android:background="@null" />
 
+            <ImageView
+                android:id="@+id/visibility4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:tint="@color/white"
+                android:src="@drawable/invisible" />
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
