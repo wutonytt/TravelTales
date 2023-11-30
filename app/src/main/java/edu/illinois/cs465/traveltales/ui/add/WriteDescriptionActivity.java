@@ -29,9 +29,9 @@ public class WriteDescriptionActivity extends AppCompatActivity
     EditText edit_text_title;
     EditText edit_text_location;
     EditText edit_text_description;
-    String title;
-    String location;
-    String description;
+    String title = "";
+    String location = "";
+    String description = "";
 
     boolean myItemShouldBeEnabled;
 
@@ -43,17 +43,32 @@ public class WriteDescriptionActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.write_description);
-        images = (ArrayList<Uri>) getIntent().getSerializableExtra("selected_images");
-        coverPhotoId = getIntent().getIntExtra("cover_photo_id", 0);
+
+        // get intent extras
+        Intent intent = getIntent();
+        images = (ArrayList<Uri>) intent.getSerializableExtra("selected_images");
+        coverPhotoId = intent.getIntExtra("cover_photo_id", 0);
+        title = intent.getStringExtra("title");
+        location = intent.getStringExtra("location");
+        description = intent.getStringExtra("description");
+
+        edit_text_title = findViewById(R.id.edit_text_title);
+        edit_text_location = findViewById(R.id.edit_text_location);
+        edit_text_description = findViewById(R.id.edit_text_description);
+        edit_text_title.setText(title);
+        edit_text_location.setText(location);
+        edit_text_description.setText(description);
+        myItemShouldBeEnabled = title != null;
+        invalidateOptionsMenu();
+
+        Log.v("tony", "writeDescription: " + coverPhotoId + " " + title + " " + location + " " + description);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        edit_text_title = findViewById(R.id.edit_text_title);
         edit_text_title.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 myItemShouldBeEnabled = s.toString().trim().length() != 0;
                 invalidateOptionsMenu();
             }

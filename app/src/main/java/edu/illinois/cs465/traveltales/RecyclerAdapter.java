@@ -1,6 +1,5 @@
 package edu.illinois.cs465.traveltales;
 
-import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,25 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
 
-    private ArrayList<Uri> uriArrayList;
+    private final ArrayList<Uri> uriArrayList;
     private OnCoverPhotoSelectedListener listener;
-    private int coverphotoid = -1;
+    private int coverphotoid;
 
-    public RecyclerAdapter(ArrayList<Uri> uriArrayList){
+    public RecyclerAdapter(ArrayList<Uri> uriArrayList, int coverPhotoId){
         this.uriArrayList = uriArrayList;
+        this.coverphotoid = coverPhotoId;
     }
 
     // A medium interface to intro the needed vars
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
@@ -50,29 +48,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.imageView.setImageURI(uriArrayList.get(position));
         holder.imageView.setAlpha(0.5f);
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (coverphotoid == position) {
+            holder.imageView.setAlpha(1f);
+        }
 
-                // Cancel selection by clicking the selected cover photo
-                if(coverphotoid == holder.getAdapterPosition()){
-                    coverphotoid = -1;
-                    holder.imageView.setAlpha(0.5f);
+        holder.imageView.setOnClickListener(v -> {
+            // Cancel selection by clicking the selected cover photo
+            if(coverphotoid == holder.getAdapterPosition()){
+                coverphotoid = -1;
+                holder.imageView.setAlpha(0.5f);
+            }
+            else{
+                if(coverphotoid != -1){
+                    //Log.v("ray", "Reseting old cover photo's alpha = " + holder.getAdapterPosition());
+                    notifyItemChanged(coverphotoid);
                 }
-                else{
-                    if(coverphotoid != -1){
-                        //Log.v("ray", "Reseting old cover photo's alpha = " + holder.getAdapterPosition());
-                        notifyItemChanged(coverphotoid);
-                    }
-                    coverphotoid = holder.getAdapterPosition();
-                    holder.imageView.setAlpha(1f);
-                }
-                //Log.v("ray", "Current cover photo is " + holder.getAdapterPosition());
+                coverphotoid = holder.getAdapterPosition();
+                holder.imageView.setAlpha(1f);
+            }
+            //Log.v("ray", "Current cover photo is " + holder.getAdapterPosition());
 
-                // Notify the listener with the new cover photo ID.
-                if (listener != null) {
-                    listener.onCoverPhotoSelected(coverphotoid);
-                }
+            // Notify the listener with the new cover photo ID.
+            if (listener != null) {
+                listener.onCoverPhotoSelected(coverphotoid);
             }
         });
     }

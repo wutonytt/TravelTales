@@ -20,11 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 import java.util.ArrayList;
 
 import edu.illinois.cs465.traveltales.R;
@@ -38,6 +35,9 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
     public int totalCount = 0;
     private int coverPhotoId = -1;
     private static final int PICK_IMAGE = 1;
+    String title;
+    String location;
+    String description;
     RecyclerView recyclerView;
     TextView coverphototextView;
     Button choose_picture;
@@ -50,8 +50,14 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        AddViewModel addViewModel =
-                new ViewModelProvider(this).get(AddViewModel.class);
+        Bundle bundle = getArguments();
+        if (bundle != null && bundle.getInt("id", -1) == 2) {
+            uri = (ArrayList<Uri>) bundle.getSerializable("images");
+            coverPhotoId = bundle.getInt("coverPhotoId");
+            title = bundle.getString("title");
+            location = bundle.getString("location");
+            description = bundle.getString("description");
+        }
 
         binding = FragmentAddBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -59,28 +65,25 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
         choose_picture = root.findViewById(R.id.choose_picture);
         choose_picture_done = root.findViewById(R.id.choose_picture_done);
         choose_picture_rest = root.findViewById(R.id.choose_picture_reset);
-        adapter = new RecyclerAdapter(uri);
+        adapter = new RecyclerAdapter(uri, coverPhotoId);
         adapter.setOnCoverPhotoSelectedListener(this);
         recyclerView = root.findViewById(R.id.recyclerview_gallery_image);
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         recyclerView.setAdapter(adapter);
 
-        choose_picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        choose_picture.setOnClickListener(v -> {
 
-                if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, Read_Permission);
-                }
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                }
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, Read_Permission);
             }
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            }
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
         });
 
         choose_picture_done.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +105,9 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 intent.putExtra("selected_images", uri);
                 Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
                 intent.putExtra("cover_photo_id", coverPhotoId);
+                intent.putExtra("title", title);
+                intent.putExtra("location", location);
+                intent.putExtra("description", description);
                 startActivity(intent);
             }
         });
@@ -149,6 +155,13 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
     public void onCoverPhotoSelected(int selectedCoverPhotoId) {
         coverPhotoId = selectedCoverPhotoId;
         Log.v("ray", "Current cover photo is " + coverPhotoId);
+    }
+
+    public static AddFragment newInstance() {
+        final AddFragment fragment = new AddFragment();
+        final Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override

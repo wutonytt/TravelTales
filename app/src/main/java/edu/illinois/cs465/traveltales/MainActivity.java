@@ -1,16 +1,15 @@
 package edu.illinois.cs465.traveltales;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import edu.illinois.cs465.traveltales.databinding.ActivityMainBinding;
@@ -22,7 +21,7 @@ import edu.illinois.cs465.traveltales.ui.search.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.navigation_profile);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
+        Log.v("tony", String.valueOf((getIntent())));
+        Log.v("ray", "get cat " + getIntent().getCategories());
 
-        if(!String.valueOf(getIntent().getCategories()).equals("{android.intent.category.LAUNCHER}")){
-            Log.v("ray", "get cat LAUNCHER " + String.valueOf(getIntent().getCategories()));
-
+        Intent intent = getIntent();
+        int intent_id = intent.getIntExtra("id", 0);
+        if (intent_id == 1) {       // from confirm post
+            Log.v("tony", "from clicking confirm post");
             int coverPhotoId = getIntent().getIntExtra("cover_photo_id", 0);
             ArrayList<Uri> images = (ArrayList<Uri>) getIntent().getSerializableExtra("selected_images");
 
@@ -50,35 +52,56 @@ public class MainActivity extends AppCompatActivity {
 
             newFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, newFragment).commit();
+        } else if (intent_id == 2) {        // from edit post
+            Log.v("tony", "from clicking edit post");
+
+            // get intent extras
+            Serializable images = intent.getSerializableExtra("images");
+            int coverPhotoId = intent.getIntExtra("coverPhotoId", -1);
+            String title = intent.getStringExtra("title");
+            String location = intent.getStringExtra("location");
+            String description = intent.getStringExtra("description");
+
+            // set extras as bundle for the new fragment
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", 2);     // edit
+            bundle.putSerializable("images", images);
+            bundle.putInt("coverPhotoId", coverPhotoId);
+            bundle.putString("title", title);
+            bundle.putString("location", location);
+            bundle.putString("description", description);
+
+            // replace fragment with new AddFragment instance
+            AddFragment newFragment = AddFragment.newInstance();
+            newFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, newFragment).commit();
+            navView.setSelectedItemId(R.id.navigation_add);
         }
 
-        navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.v("ray", "nav bar clicked");
-                if(item.getItemId() == R.id.navigation_home){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
-                    return true;
-                }
-                else if(item.getItemId() == R.id.navigation_search){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new SearchFragment()).commit();
-                    return true;
-                }
-                else if(item.getItemId() ==  R.id.navigation_add){
-                    Log.v("ray", "R.id = navigation_add");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new AddFragment()).commit();
-                    return true;
-                }
-                else if(item.getItemId() == R.id.navigation_map){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).commit();
-                    return true;
-                }
-                else if(item.getItemId() == R.id.navigation_profile){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
-                    return true;
-                }
-                return false;
+        navView.setOnItemSelectedListener(item -> {
+            Log.v("ray", "nav bar clicked");
+            if(item.getItemId() == R.id.navigation_home){
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+                return true;
             }
+            else if(item.getItemId() == R.id.navigation_search){
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SearchFragment()).commit();
+                return true;
+            }
+            else if(item.getItemId() ==  R.id.navigation_add){
+                Log.v("ray", "R.id = navigation_add");
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AddFragment()).commit();
+                return true;
+            }
+            else if(item.getItemId() == R.id.navigation_map){
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).commit();
+                return true;
+            }
+            else if(item.getItemId() == R.id.navigation_profile){
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProfileFragment()).commit();
+                return true;
+            }
+            return false;
         });
     }
 }
