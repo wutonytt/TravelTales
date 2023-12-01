@@ -75,6 +75,4 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemClickL
     }
 
 
-
-
 }
