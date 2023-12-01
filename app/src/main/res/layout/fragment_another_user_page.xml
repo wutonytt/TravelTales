@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:text="See Description"
         android:layout_below="@id/profileLayout"
-        android:layout_marginTop="425dp"
+        android:layout_marginTop="0dp"
         android:layout_centerHorizontal="true"
         android:onClick="onSeeDescriptionClick" />
 
@@ -96,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/journalLayout"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="40dp"
         android:columnCount="2"
         android:rowCount="3"
         android:layout_marginStart="16dp"
