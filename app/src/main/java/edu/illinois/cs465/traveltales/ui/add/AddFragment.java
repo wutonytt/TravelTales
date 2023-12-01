@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.RecyclerAdapter;
 import edu.illinois.cs465.traveltales.databinding.FragmentAddBinding;
-import edu.illinois.cs465.traveltales.ui.search.AnotherUserPageFragment;
 
 public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhotoSelectedListener {
 
