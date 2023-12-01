@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             String title = intent.getStringExtra("title");
             String location = intent.getStringExtra("location");
             String description = intent.getStringExtra("description");
-
+            int visibility = intent.getIntExtra("visibility", 1);
             // set extras as bundle for the new fragment
             Bundle bundle = new Bundle();
             bundle.putInt("id", 2);     // edit
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             bundle.putString("title", title);
             bundle.putString("location", location);
             bundle.putString("description", description);
+            bundle.putInt("visibility", visibility);
 
             // replace fragment with new AddFragment instance
             AddFragment newFragment = AddFragment.newInstance();

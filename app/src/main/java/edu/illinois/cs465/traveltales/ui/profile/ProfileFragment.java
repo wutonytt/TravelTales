@@ -73,6 +73,7 @@ public class ProfileFragment extends Fragment {
                 intent.putExtra("title", global.title);
                 intent.putExtra("location", global.location);
                 intent.putExtra("description", global.description);
+                intent.putExtra("visibility", global.visibility);
                 startActivity(intent);
             });
             journal_count += 1;

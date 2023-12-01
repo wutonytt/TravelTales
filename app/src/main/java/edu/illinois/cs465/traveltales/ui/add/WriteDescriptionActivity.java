@@ -52,7 +52,7 @@ public class WriteDescriptionActivity extends AppCompatActivity
         title = intent.getStringExtra("title");
         location = intent.getStringExtra("location");
         description = intent.getStringExtra("description");
-        visibility = intent.getIntExtra("visibility", 0);
+        visibility = intent.getIntExtra("visibility", 1);
 
         edit_text_title = findViewById(R.id.edit_text_title);
         edit_text_location = findViewById(R.id.edit_text_location);

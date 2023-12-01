@@ -39,6 +39,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
     String title;
     String location;
     String description;
+    int visibility = 1;
     RecyclerView recyclerView;
     TextView coverphototextView;
     Button choose_picture;
@@ -58,6 +59,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
             title = bundle.getString("title");
             location = bundle.getString("location");
             description = bundle.getString("description");
+            visibility = bundle.getInt("visibility");
         }
 
         binding = FragmentAddBinding.inflate(inflater, container, false);
@@ -65,7 +67,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
         coverphototextView = root.findViewById(R.id.text_choose_cover_photo);
         choose_picture = root.findViewById(R.id.choose_picture);
         choose_picture_done = root.findViewById(R.id.choose_picture_done);
-        choose_picture_done.getBackground().setAlpha(100);
+        if(coverPhotoId==-1) choose_picture_done.getBackground().setAlpha(100);
         choose_picture_rest = root.findViewById(R.id.choose_picture_reset);
         adapter = new RecyclerAdapter(uri, coverPhotoId);
         adapter.setOnCoverPhotoSelectedListener(this);
@@ -110,7 +112,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 intent.putExtra("title", title);
                 intent.putExtra("location", location);
                 intent.putExtra("description", description);
-                intent.putExtra("visibility", 1); // set to invisible
+                intent.putExtra("visibility", visibility); // set to invisible
                 startActivity(intent);
             }
         });
