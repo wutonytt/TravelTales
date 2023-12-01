@@ -41,6 +41,7 @@ public class ConfirmPost extends AppCompatActivity {
         title = getIntent().getStringExtra("title");
         location = getIntent().getStringExtra("location");
         description = getIntent().getStringExtra("description");
+        visibility = getIntent().getIntExtra("visibility", 1);
 
         ImageView imageView = findViewById(R.id.confirm_cover_image);
         imageView.setImageURI(images.get(coverPhotoId));
@@ -62,6 +63,8 @@ public class ConfirmPost extends AppCompatActivity {
         });
 
         Switch toggleSwitch = findViewById(R.id.toggleSwitch);
+        toggleSwitch.setChecked((visibility==0));
+        Log.v("ray", String.valueOf(visibility));
 
         toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -116,7 +119,7 @@ public class ConfirmPost extends AppCompatActivity {
             intent.putExtra("title", title);
             intent.putExtra("location", location);
             intent.putExtra("description", description);
-
+            intent.putExtra("visibility", visibility);
 
 
             startActivity(intent);
