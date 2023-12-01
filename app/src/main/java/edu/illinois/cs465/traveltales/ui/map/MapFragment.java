@@ -62,6 +62,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         googleMap = map;
         if (googleMap != null) {
             String apiKey = getString(R.string.google_maps_key);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
+            googleMap.setPadding(0, 100, 0, 200);
+
             Log.d("MapLoop", "In map loop");
 
             // Set up markers for different locations
