@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.databinding.FragmentUserJournalDescriptionBinding;
-import edu.illinois.cs465.traveltales.ui.search.UserJournalDescriptionFragment;
 
 public class YourJournalDescriptionFragment extends Fragment {
 
