@@ -161,7 +161,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
     public void onCoverPhotoSelected(int selectedCoverPhotoId) {
         coverPhotoId = selectedCoverPhotoId;
         if(coverPhotoId == -1) choose_picture_done.getBackground().setAlpha(100);
-        else choose_picture_done.getBackground().setAlpha(225);
+        else choose_picture_done.getBackground().setAlpha(255);
         Log.v("ray", "Current cover photo is " + coverPhotoId);
     }
 
