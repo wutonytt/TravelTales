@@ -66,6 +66,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
         coverphototextView = root.findViewById(R.id.text_choose_cover_photo);
         choose_picture = root.findViewById(R.id.choose_picture);
         choose_picture_done = root.findViewById(R.id.choose_picture_done);
+        choose_picture_done.getBackground().setAlpha(100);
         choose_picture_rest = root.findViewById(R.id.choose_picture_reset);
         adapter = new RecyclerAdapter(uri, coverPhotoId);
         adapter.setOnCoverPhotoSelectedListener(this);
@@ -148,6 +149,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
             // Select a single image
             else{
                 uri.add(data.getData());
+                totalCount += 1;
             }
         }
         // No image selected
@@ -158,6 +160,8 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
 
     public void onCoverPhotoSelected(int selectedCoverPhotoId) {
         coverPhotoId = selectedCoverPhotoId;
+        if(coverPhotoId == -1) choose_picture_done.getBackground().setAlpha(100);
+        else choose_picture_done.getBackground().setAlpha(225);
         Log.v("ray", "Current cover photo is " + coverPhotoId);
     }
 
