@@ -12,4 +12,6 @@ public class Global extends Application {
     public String location;
     public String description;
     public int journal_count = 3;
+    // set this variable where I am choosing visibility, read this value at profile fragment
+    public int visibility = 1;  // 0 -> public, // 1 -> private
 }

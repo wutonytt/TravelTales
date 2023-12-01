@@ -112,8 +112,15 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
 
                 Button privateButton = root.findViewById(R.id.privateButton);
                 Button publicButton = root.findViewById(R.id.publicButton);
+                Button nextButton = root.findViewById(R.id.choose_picture_done);
                 privateButton.setVisibility(View.VISIBLE);
                 publicButton.setVisibility(View.VISIBLE);
+                nextButton.setVisibility(View.INVISIBLE);
+                ViewGroup parentLayout = (ViewGroup) nextButton.getParent();
+
+                if (parentLayout != null) {
+                    parentLayout.removeView(nextButton);
+                }
 
                 privateButton.setOnClickListener(new View.OnClickListener() {
                      @Override
@@ -125,9 +132,27 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                         intent.putExtra("title", title);
                         intent.putExtra("location", location);
                         intent.putExtra("description", description);
+                        intent.putExtra("visibility", 1); // set to invisible
                         startActivity(intent);
                      }
                 });
+
+                publicButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(requireContext(), WriteDescriptionActivity.class);
+                        intent.putExtra("selected_images", uri);
+                        Log.v("ray", "Sending the cover photo id =" + coverPhotoId);
+                        intent.putExtra("cover_photo_id", coverPhotoId);
+                        intent.putExtra("title", title);
+                        intent.putExtra("location", location);
+                        intent.putExtra("description", description);
+                        intent.putExtra("visibility", 0); // set to visible
+                        startActivity(intent);
+                    }
+                });
+
+
             }
         });
 

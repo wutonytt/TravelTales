@@ -26,6 +26,7 @@ public class ConfirmPost extends AppCompatActivity {
     String title;
     String location;
     String description;
+    int visibility;
 
 
     @Override
@@ -39,6 +40,7 @@ public class ConfirmPost extends AppCompatActivity {
         title = getIntent().getStringExtra("title");
         location = getIntent().getStringExtra("location");
         description = getIntent().getStringExtra("description");
+        visibility = getIntent().getIntExtra("visibility", 0);
 
         ImageView imageView = findViewById(R.id.confirm_cover_image);
         imageView.setImageURI(images.get(coverPhotoId));
@@ -56,6 +58,10 @@ public class ConfirmPost extends AppCompatActivity {
             intent.putExtra("selected_images", images);
             Log.v("tony", "Sending the cover photo id =" + coverPhotoId);
             intent.putExtra("cover_photo_id", coverPhotoId);
+
+            if (visibility == 0) {
+                intent.putExtra("visibility", 0);
+            }
             startActivity(intent);
         });
 
@@ -88,6 +94,7 @@ public class ConfirmPost extends AppCompatActivity {
             ((Global) this.getApplication()).location = location;
             ((Global) this.getApplication()).description = description;
             ((Global) this.getApplication()).journal_count = 4;
+            ((Global) this.getApplication()).visibility = visibility;
 
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("id", 1);
@@ -97,6 +104,8 @@ public class ConfirmPost extends AppCompatActivity {
             intent.putExtra("title", title);
             intent.putExtra("location", location);
             intent.putExtra("description", description);
+
+
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

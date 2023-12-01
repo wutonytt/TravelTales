@@ -78,6 +78,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:background="@color/lighterPurple"
             android:text="Public"
             android:visibility="invisible"/>
     </LinearLayout>

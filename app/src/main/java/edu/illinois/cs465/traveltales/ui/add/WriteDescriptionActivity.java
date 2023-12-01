@@ -32,6 +32,7 @@ public class WriteDescriptionActivity extends AppCompatActivity
     String title = "";
     String location = "";
     String description = "";
+    int visibility;
 
     boolean myItemShouldBeEnabled;
 
@@ -51,6 +52,7 @@ public class WriteDescriptionActivity extends AppCompatActivity
         title = intent.getStringExtra("title");
         location = intent.getStringExtra("location");
         description = intent.getStringExtra("description");
+        visibility = intent.getIntExtra("visibility", 0);
 
         edit_text_title = findViewById(R.id.edit_text_title);
         edit_text_location = findViewById(R.id.edit_text_location);
@@ -124,6 +126,9 @@ public class WriteDescriptionActivity extends AppCompatActivity
             intent.putExtra("title", title);
             intent.putExtra("location", location);
             intent.putExtra("description", description);
+            intent.putExtra("visibility", visibility);
+
+
             startActivity(intent);
         } else if (item.getItemId() == android.R.id.home) {
             if (title.length() != 0 || location.length() != 0 || description.length() != 0) {

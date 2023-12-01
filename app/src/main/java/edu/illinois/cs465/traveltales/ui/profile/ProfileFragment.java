@@ -28,6 +28,7 @@ public class ProfileFragment extends Fragment {
     int coverPhotoId = -1;
     ImageView addImageView;
     ImageView addPencil;
+    int visibility;
 
 
     // initial journal counts: set3
@@ -42,6 +43,19 @@ public class ProfileFragment extends Fragment {
         final TextView journalCount = binding.journalCount;
 
         coverPhotoId = ((Global) this.getActivity().getApplication()).coverPhotoId;
+        visibility = ((Global) this.getActivity().getApplication()).visibility;
+
+        // EDIT
+
+        // if use selected to have public journal
+        if (visibility == 0){
+
+
+            ImageView eye_icon = root.findViewById(R.id.visibility4);
+            int visible_icon = R.drawable.visible;
+            eye_icon.setImageResource(visible_icon);
+        }
+
         if(coverPhotoId != -1){
             Log.v("ray", "shared data = " + ((Global) this.getActivity().getApplication()).images );
             Uri coverPhotouri = ((Global) this.getActivity().getApplication()).images.get(coverPhotoId);
