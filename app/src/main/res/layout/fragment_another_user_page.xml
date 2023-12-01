@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.search.AnotherUserPageActivity">
 
     <TextView
-        android:id="@+id/tonyjournaltext"
+        android:id="@+id/travelTalesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TONY'S AMSTERDAM JOURNAL"
@@ -19,23 +22,22 @@
         android:id="@+id/profileLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tonyjournaltext"
+        android:layout_below="@id/travelTalesText"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp">
+
+
 
         <!--     Add profile picture-->
         <ImageView
             android:id="@+id/profilePicture"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_marginStart="8dp"
+            android:layout_margin="8dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/tonypicture" />
+            android:src="@drawable/tonypicture"
+            android:clipToOutline="true" />
 
         <!--     Add username under profile picture-->
         <TextView
@@ -63,6 +65,7 @@
             android:layout_toEndOf="@id/profilePicture"
             android:layout_alignTop="@id/profilePicture"
             android:src="@drawable/netherlandsflag"/>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -78,7 +81,6 @@
         >
 
     </LinearLayout>
-
     <Button
         android:id="@+id/seeDescriptionButton"
         android:layout_width="wrap_content"
@@ -93,8 +95,8 @@
         android:id="@+id/picturesGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/seeDescriptionButton"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/journalLayout"
+        android:layout_marginTop="40dp"
         android:columnCount="2"
         android:rowCount="3"
         android:layout_marginStart="16dp"

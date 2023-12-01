@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.databinding.FragmentAnotherUserPageBinding;
-import edu.illinois.cs465.traveltales.ui.search.UserJournalDescriptionFragment;
 
 public class YourChicagoJournalFragment extends Fragment {
 
@@ -49,7 +48,7 @@ public class YourChicagoJournalFragment extends Fragment {
         // refer to Search Fragment for help
         flagImage.setImageResource(usaflag);
 
-        final TextView samjournaltext = binding.tonyjournaltext;
+        final TextView samjournaltext = binding.travelTalesText;
         samjournaltext.setText("Sam's Chicago Journal");
 
         final ImageView profilepicture = binding.profilePicture;
