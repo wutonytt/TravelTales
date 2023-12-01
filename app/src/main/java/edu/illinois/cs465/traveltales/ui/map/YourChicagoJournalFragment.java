@@ -48,7 +48,7 @@ public class YourChicagoJournalFragment extends Fragment {
         // refer to Search Fragment for help
         flagImage.setImageResource(usaflag);
 
-        final TextView samjournaltext = binding.tonyjournaltext;
+        final TextView samjournaltext = binding.travelTalesText;
         samjournaltext.setText("Sam's Chicago Journal");
 
         final ImageView profilepicture = binding.profilePicture;

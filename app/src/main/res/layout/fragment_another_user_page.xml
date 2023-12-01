@@ -54,7 +54,7 @@
 
 
         <ImageView
-            android:id="@+id/journalText"
+            android:id="@+id/flag"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginRight="10dp"
