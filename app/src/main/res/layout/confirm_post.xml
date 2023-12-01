@@ -37,6 +37,15 @@
             android:orientation="vertical"
             android:paddingHorizontal="40dp"
             android:paddingBottom="30dp">
+
+            <Switch
+                android:id="@+id/toggleSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Set this journal public"
+                android:textSize= "20sp" />
+
             <TextView
                 android:id="@+id/confirm_title"
                 android:layout_width="match_parent"

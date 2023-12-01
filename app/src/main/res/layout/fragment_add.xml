@@ -54,6 +54,7 @@
         android:textStyle="bold"
         android:text="Please Select Photos"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_gallery_image"
         android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import edu.illinois.cs465.traveltales.R;
 import edu.illinois.cs465.traveltales.RecyclerAdapter;
 import edu.illinois.cs465.traveltales.databinding.FragmentAddBinding;
+import edu.illinois.cs465.traveltales.ui.search.AnotherUserPageFragment;
 
 public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhotoSelectedListener {
 
@@ -108,6 +110,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
                 intent.putExtra("title", title);
                 intent.putExtra("location", location);
                 intent.putExtra("description", description);
+                intent.putExtra("visibility", 1); // set to invisible
                 startActivity(intent);
             }
         });
@@ -124,6 +127,7 @@ public class AddFragment extends Fragment implements RecyclerAdapter.OnCoverPhot
         });
         return root;
     }
+
 
     // Select image activity
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){

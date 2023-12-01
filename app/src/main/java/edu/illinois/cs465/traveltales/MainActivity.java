@@ -1,6 +1,7 @@
 package edu.illinois.cs465.traveltales;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
             String coverphotouri = images.get(coverPhotoId).toString();
             bundle.putString("cover_photo_uri",coverphotouri);
 
+
             newFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, newFragment).commit();
+
+
+
         } else if (intent_id == 2) {        // from edit post
             Log.v("tony", "from clicking edit post");
 
