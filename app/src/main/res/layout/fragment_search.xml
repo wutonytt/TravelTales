@@ -8,16 +8,6 @@
     android:orientation="vertical"
     tools:context=".ui.search.Search_Fragment">
 
-    <!-- Title -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TravelTales"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="5dp"/>
-
     <!-- Search Bar -->
     <RelativeLayout
         android:layout_width="match_parent"
