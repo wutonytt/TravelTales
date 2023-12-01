@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +28,7 @@ public class ConfirmPost extends AppCompatActivity {
     String title;
     String location;
     String description;
-    int visibility;
-
+    int visibility = 1; // default
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +41,6 @@ public class ConfirmPost extends AppCompatActivity {
         title = getIntent().getStringExtra("title");
         location = getIntent().getStringExtra("location");
         description = getIntent().getStringExtra("description");
-        visibility = getIntent().getIntExtra("visibility", 0);
 
         ImageView imageView = findViewById(R.id.confirm_cover_image);
         imageView.setImageURI(images.get(coverPhotoId));
@@ -58,11 +58,21 @@ public class ConfirmPost extends AppCompatActivity {
             intent.putExtra("selected_images", images);
             Log.v("tony", "Sending the cover photo id =" + coverPhotoId);
             intent.putExtra("cover_photo_id", coverPhotoId);
-
-            if (visibility == 0) {
-                intent.putExtra("visibility", 0);
-            }
             startActivity(intent);
+        });
+
+        Switch toggleSwitch = findViewById(R.id.toggleSwitch);
+
+        toggleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Handle toggle switch state change
+                if (isChecked) {
+                    visibility = 0; // public
+                } else {
+                    visibility = 1; // private
+                }
+            }
         });
 
     }
@@ -84,6 +94,8 @@ public class ConfirmPost extends AppCompatActivity {
 
         if (item.getItemId() == R.id.action_next) {
 
+            System.out.println("VISIBILITY: " + visibility);
+
             Toast.makeText(this, "Uploading new post...", Toast.LENGTH_SHORT).show();
             // TODO: store input value and return to the previous page with updated identifier
 
@@ -104,6 +116,7 @@ public class ConfirmPost extends AppCompatActivity {
             intent.putExtra("title", title);
             intent.putExtra("location", location);
             intent.putExtra("description", description);
+
 
 
             startActivity(intent);
